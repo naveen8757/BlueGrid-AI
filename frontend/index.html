@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BlueGrid AI | Island Energy Intelligence</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Leaflet -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <div class="page-glow"></div>
+    <div class="grid-background"></div>
+
+    <!-- =====================================================
+         TOP HEADER
+    ====================================================== -->
+
+    <header class="top-header">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                ≋
+            </div>
+
+            <div class="brand-text">
+                <h1>BlueGrid AI</h1>
+
+                <p>
+                    Clean Energy
+                    <span>•</span>
+                    Resilient Islands
+                    <span>•</span>
+                    A Brighter Future
+                </p>
+            </div>
+
+        </div>
+
+        <div class="header-right">
+
+            <div class="backend-status" id="backendStatus">
+                <span class="status-dot"></span>
+                <span id="backendStatusText">Checking Backend...</span>
+            </div>
+
+            <div class="version">
+                v1.0
+            </div>
+
+            <div class="weather">
+
+                <span class="weather-icon">☀️</span>
+
+                <div>
+                    <strong>28°C</strong>
+                    <small>Lakshadweep</small>
+                </div>
+
+            </div>
+
+            <div class="profile">
+                BG
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         APPLICATION
+    ====================================================== -->
+
+    <div class="app-layout">
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+
+        <aside class="sidebar">
+
+            <nav>
+
+                <a href="#dashboard" class="nav-item active">
+                    <span>⌂</span>
+                    <label>Dashboard</label>
+                </a>
+
+                <a href="#islands" class="nav-item">
+                    <span>♒</span>
+                    <label>Islands</label>
+                </a>
+
+                <a href="#monitoring" class="nav-item">
+                    <span>⌁</span>
+                    <label>Live Monitoring</label>
+                </a>
+
+                <a href="#optimizer" class="nav-item">
+                    <span>⚡</span>
+                    <label>Optimizer</label>
+                </a>
+
+                <a href="#analytics" class="nav-item">
+                    <span>▥</span>
+                    <label>Analytics</label>
+                </a>
+
+                <a href="#report" class="nav-item">
+                    <span>▤</span>
+                    <label>Reports</label>
+                </a>
+
+                <a href="#intelligence" class="nav-item">
+                    <span>♧</span>
+                    <label>AI Intelligence</label>
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <div class="sidebar-message">
+                    <strong>
+                        Powering<br>
+                        Island Futures
+                    </strong>
+
+                    <span>
+                        with Clean Energy
+                    </span>
+                </div>
+
+                <div class="wave-symbol">
+                    ≋
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAIN CONTENT
+        ================================================== -->
+
+        <main class="main-content">
+
+
+            <!-- =================================================
+                 HERO
+            ================================================== -->
+
+            <section id="dashboard" class="hero">
+
+                <div class="hero-content">
+
+                    <div>
+
+                        <h2>
+                            BlueGrid <span>AI</span>
+                        </h2>
+
+                        <h3>
+                            Smarter Energy
+                            <span>•</span>
+                            Sustainable Islands
+                        </h3>
+
+                        <p>
+                            AI-powered optimization for clean, reliable and
+                            affordable energy in island communities.
+                        </p>
+
+                    </div>
+
+
+                    <div class="hero-message">
+
+                        <span class="hero-leaf">
+                            ◇
+                        </span>
+
+                        <strong>
+                            Clean Energy Today
+                        </strong>
+
+                        <strong>
+                            Sustainable Tomorrow
+                        </strong>
+
+                        <div class="hero-wave">
+                            〰〰〰
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 ISLAND SELECTION
+            ================================================== -->
+
+            <section id="islands" class="dashboard-panel island-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="panel-icon">⌁</span>
+
+                        <h2>
+                            Island Selection
+                        </h2>
+                    </div>
+
+
+                    <div class="search-area">
+
+                        <div class="search-box">
+
+                            <span>⌕</span>
+
+                            <input
+                                type="text"
+                                id="islandSearch"
+                                placeholder="Search islands..."
+                            >
+
+                        </div>
+
+                        <button
+                            id="clearSearch"
+                            class="secondary-btn"
+                        >
+                            Clear
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="islandGrid"
+                    class="island-grid"
+                ></div>
+
+                <div
+                    id="noIslandResults"
+                    class="no-results"
+                >
+                    No island found.
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 MONITORING + AI
+            ================================================== -->
+
+            <section
+                id="monitoring"
+                class="middle-grid"
+            >
+
+
+                <!-- LIVE MONITORING -->
+
+                <div class="dashboard-panel monitoring-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="panel-icon live-icon">
+                                ●
+                            </span>
+
+                            <h2>
+                                Live Monitoring
+                            </h2>
+                        </div>
+
+                        <span
+                            class="last-update"
+                            id="lastUpdate"
+                        >
+                            Last Update: --
+                        </span>
+
+                    </div>
+
+
+                    <select
+                        id="islandSelector"
+                        class="island-selector"
+                    ></select>
+
+
+                    <div class="monitor-content">
+
+                        <div class="renewable-ring">
+
+                            <div class="ring">
+
+                                <div class="ring-inner">
+
+                                    <small>
+                                        Renewable
+                                    </small>
+
+                                    <strong id="liveRenewable">
+                                        0%
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="monitor-values">
+
+                            <div class="monitor-row">
+                                <span>⚡</span>
+
+                                <div>
+                                    <small>Demand</small>
+                                    <strong id="liveDemand">
+                                        0 MW
+                                    </strong>
+                                </div>
+                            </div>
+
+
+                            <div class="monitor-row">
+                                <span>☀️</span>
+
+                                <div>
+                                    <small>Solar</small>
+                                    <strong id="liveSolar">
+                                        0%
+                                    </strong>
+                                </div>
+                            </div>
+
+
+                            <div class="monitor-row">
+                                <span>≋</span>
+
+                                <div>
+                                    <small>Wind</small>
+                                    <strong id="liveWind">
+                                        0%
+                                    </strong>
+                                </div>
+                            </div>
+
+
+                            <div class="monitor-row">
+                                <span>🌊</span>
+
+                                <div>
+                                    <small>OTEC</small>
+                                    <strong id="liveOtec">
+                                        0%
+                                    </strong>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="online-status">
+
+                        <span class="status-dot"></span>
+
+                        <span>
+                            SYSTEM ONLINE
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AI INTELLIGENCE -->
+
+                <div
+                    id="intelligence"
+                    class="dashboard-panel intelligence-panel"
+                >
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="panel-icon">
+                                ♧
+                            </span>
+
+                            <h2>
+                                AI Intelligence
+                            </h2>
+                        </div>
+
+                        <span
+                            id="aiPotentialBadge"
+                            class="potential-badge"
+                        >
+                            READY
+                        </span>
+
+                    </div>
+
+
+                    <div class="ai-stat-grid">
+
+                        <div class="ai-stat">
+
+                            <span class="ai-stat-icon">
+                                ♻
+                            </span>
+
+                            <div>
+                                <small>
+                                    Renewable Potential
+                                </small>
+
+                                <strong id="renewablePotential">
+                                    0%
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="ai-stat">
+
+                            <span class="ai-stat-icon">
+                                ▣
+                            </span>
+
+                            <div>
+                                <small>
+                                    Storage Potential
+                                </small>
+
+                                <strong id="storagePotential">
+                                    4.0 h
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="ai-recommendation">
+
+                        <div class="recommendation-title">
+                            💡 AI Recommendation
+                        </div>
+
+                        <p id="automaticRecommendation">
+                            Select an island to begin AI analysis.
+                        </p>
+
+                        <small id="automaticAnalysisText">
+                            BlueGrid AI will automatically evaluate
+                            renewable resources.
+                        </small>
+
+                    </div>
+
+
+                    <button
+                        id="viewAnalysisBtn"
+                        class="outline-btn"
+                    >
+                        View Full Analysis
+                        <span>›</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 MAP + OPTIMIZER + CHART
+            ================================================== -->
+
+            <section class="main-dashboard-grid">
+
+
+                <!-- MAP -->
+
+                <div class="dashboard-panel map-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="panel-icon">
+                                ▰
+                            </span>
+
+                            <h2>
+                                Island Map
+                            </h2>
+                        </div>
+
+
+                        <div class="map-status">
+
+                            <span>
+                                <i class="online"></i>
+                                Online
+                            </span>
+
+                            <span>
+                                <i class="warning"></i>
+                                Warning
+                            </span>
+
+                            <span>
+                                <i class="critical"></i>
+                                Critical
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div id="map"></div>
+
+                </div>
+
+
+                <!-- OPTIMIZER -->
+
+                <div
+                    id="optimizer"
+                    class="dashboard-panel optimizer-panel"
+                >
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="panel-icon">
+                                ⚡
+                            </span>
+
+                            <h2>
+                                Optimizer
+                            </h2>
+                        </div>
+
+
+                        <button
+                            id="optimizeBtn"
+                            class="optimize-btn"
+                        >
+                            ⚡ Optimize Energy Mix
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="optimizerEngineStatus"
+                        class="engine-status"
+                    >
+                        <span class="engine-light"></span>
+
+                        <div>
+                            <strong>
+                                AI ENGINE ONLINE
+                            </strong>
+
+                            <small>
+                                Ready for optimization
+                            </small>
+                        </div>
+                    </div>
+
+
+                    <div class="optimal-mix">
+
+                        <h3>
+                            Optimal Mix
+                            <span id="resultStatus">
+                                Ready
+                            </span>
+                        </h3>
+
+
+                        <div class="mix-capacity-grid">
+
+                            <div class="capacity-mini">
+                                <span>☀️</span>
+                                <small>Solar</small>
+                                <strong id="solarResult">
+                                    0 kW
+                                </strong>
+                            </div>
+
+                            <div class="capacity-mini">
+                                <span>≋</span>
+                                <small>Wind</small>
+                                <strong id="windResult">
+                                    0 kW
+                                </strong>
+                            </div>
+
+                            <div class="capacity-mini">
+                                <span>🌊</span>
+                                <small>OTEC</small>
+                                <strong id="otecResult">
+                                    0 kW
+                                </strong>
+                            </div>
+
+                            <div class="capacity-mini">
+                                <span>🔋</span>
+                                <small>Battery</small>
+                                <strong id="batteryResult">
+                                    0 kWh
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <h3 class="key-results-title">
+                            Key Results
+                        </h3>
+
+
+                        <div class="result-circles">
+
+                            <div>
+                                <strong id="renewablePercent">
+                                    0%
+                                </strong>
+                                <small>Renewable</small>
+                            </div>
+
+                            <div>
+                                <strong id="reliabilityResult">
+                                    0%
+                                </strong>
+                                <small>Reliability</small>
+                            </div>
+
+                            <div>
+                                <strong id="reserveResult">
+                                    0 h
+                                </strong>
+                                <small>Reserve</small>
+                            </div>
+
+                            <div>
+                                <strong id="lcoeResult">
+                                    ₹0
+                                </strong>
+                                <small>LCOE</small>
+                            </div>
+
+                            <div>
+                                <strong id="scoreResult">
+                                    0
+                                </strong>
+                                <small>Score</small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ENERGY CHART -->
+
+                <div
+                    id="analytics"
+                    class="dashboard-panel chart-panel"
+                >
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="panel-icon">
+                                ▥
+                            </span>
+
+                            <h2>
+                                Energy Generation & Demand
+                            </h2>
+                        </div>
+
+
+                        <div class="chart-period">
+                            <button>7D</button>
+                            <button>30D</button>
+                            <button class="active">1Y</button>
+                        </div>
+
+                    </div>
+
+
+                    <div class="chart-legend">
+
+                        <span>
+                            <i class="renewable-dot"></i>
+                            Renewable Supply
+                        </span>
+
+                        <span>
+                            <i class="demand-dot"></i>
+                            Island Demand
+                        </span>
+
+                    </div>
+
+
+                    <div class="chart-container">
+                        <canvas id="generationChart"></canvas>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 BOTTOM ANALYTICS
+            ================================================== -->
+
+            <section class="bottom-grid">
+
+
+                <!-- ANALYTICS SUMMARY -->
+
+                <div class="dashboard-panel summary-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="panel-icon">
+                                ▥
+                            </span>
+
+                            <h2>
+                                Analytics
+                            </h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-cards">
+
+                        <div>
+                            <span>⚡</span>
+
+                            <small>
+                                Annual Generation
+                            </small>
+
+                            <strong id="annualGeneration">
+                                0 MWh
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <span>≋</span>
+
+                            <small>
+                                Peak Demand
+                            </small>
+
+                            <strong id="peakDemand">
+                                0 MW
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <span>🔋</span>
+
+                            <small>
+                                Storage Capacity
+                            </small>
+
+                            <strong id="storageCapacity">
+                                0 kWh
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ENERGY MIX -->
+
+                <div class="dashboard-panel energy-mix-panel">
+
+                    <div class="panel-header">
+
+                        <h2>
+                            Energy Mix
+                        </h2>
+
+                    </div>
+
+
+                    <div class="mix-chart-wrapper">
+
+                        <canvas id="mixChart"></canvas>
+
+                        <div class="mix-center">
+
+                            <strong id="mixCenterValue">
+                                0%
+                            </strong>
+
+                            <small>
+                                Renewable
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mix-legend">
+
+                        <span>
+                            <i class="solar-color"></i>
+                            Solar
+                            <b id="solarMixPercent">0%</b>
+                        </span>
+
+                        <span>
+                            <i class="wind-color"></i>
+                            Wind
+                            <b id="windMixPercent">0%</b>
+                        </span>
+
+                        <span>
+                            <i class="otec-color"></i>
+                            OTEC
+                            <b id="otecMixPercent">0%</b>
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SYSTEM STATUS -->
+
+                <div class="dashboard-panel system-panel">
+
+                    <div class="panel-header">
+
+                        <h2>
+                            System Status
+                        </h2>
+
+                    </div>
+
+
+                    <div class="system-row">
+
+                        <span>☀️ Solar System</span>
+
+                        <div>
+                            <i></i>
+                            Online
+                        </div>
+
+                        <b>92%</b>
+
+                    </div>
+
+
+                    <div class="system-row">
+
+                        <span>≋ Wind System</span>
+
+                        <div>
+                            <i></i>
+                            Online
+                        </div>
+
+                        <b>87%</b>
+
+                    </div>
+
+
+                    <div class="system-row">
+
+                        <span>🌊 OTEC System</span>
+
+                        <div>
+                            <i></i>
+                            Online
+                        </div>
+
+                        <b>96%</b>
+
+                    </div>
+
+
+                    <div class="system-row">
+
+                        <span>🔋 Battery System</span>
+
+                        <div>
+                            <i></i>
+                            Online
+                        </div>
+
+                        <b>91%</b>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="dashboard-panel quick-panel">
+
+                    <div class="panel-header">
+
+                        <h2>
+                            Quick Actions
+                        </h2>
+
+                    </div>
+
+
+                    <button id="generateReportBtn">
+                        ▤ Generate Report
+                    </button>
+
+                    <button id="downloadPdfBtn">
+                        ↓ Download PDF
+                    </button>
+
+                    <button id="viewAnalyticsBtn">
+                        ▥ View Detailed Analytics
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 DETAILED RESULTS
+            ================================================== -->
+
+            <section
+                id="results"
+                class="results-section dashboard-panel"
+            >
+
+                <div class="section-heading">
+
+                    <span>
+                        OPTIMIZATION RESULTS
+                    </span>
+
+                    <h2>
+                        Your Optimized Energy System
+                    </h2>
+
+                    <p>
+                        BlueGrid AI has analyzed the selected island
+                        and calculated a hybrid renewable energy system.
+                    </p>
+
+                </div>
+
+
+                <div class="large-results">
+
+                    <div>
+                        <span>☀️</span>
+                        <small>Solar Capacity</small>
+                        <strong id="solarResultLarge">0 kW</strong>
+                    </div>
+
+                    <div>
+                        <span>≋</span>
+                        <small>Wind Capacity</small>
+                        <strong id="windResultLarge">0 kW</strong>
+                    </div>
+
+                    <div>
+                        <span>🌊</span>
+                        <small>OTEC Capacity</small>
+                        <strong id="otecResultLarge">0 kW</strong>
+                    </div>
+
+                    <div>
+                        <span>🔋</span>
+                        <small>Battery Storage</small>
+                        <strong id="batteryResultLarge">0 kWh</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="performance-grid">
+
+                    <div>
+                        <small>🌱 Renewable Energy</small>
+                        <strong id="renewablePercentLarge">
+                            0%
+                        </strong>
+                    </div>
+
+                    <div>
+                        <small>🛡️ System Reliability</small>
+                        <strong id="reliabilityLarge">
+                            0%
+                        </strong>
+                    </div>
+
+                    <div>
+                        <small>🔋 Battery Reserve</small>
+                        <strong id="reserveLarge">
+                            0 h
+                        </strong>
+                    </div>
+
+                    <div>
+                        <small>💰 Estimated LCOE</small>
+                        <strong id="lcoeLarge">
+                            ₹0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="score-panel">
+
+                    <div>
+
+                        <span>
+                            BLUEGRID AI SCORE
+                        </span>
+
+                        <h3>
+                            System Performance
+                        </h3>
+
+                        <p id="recommendationText">
+                            Run the optimizer to generate
+                            the AI recommendation.
+                        </p>
+
+                    </div>
+
+
+                    <div class="score-number">
+                        <strong id="scoreLarge">
+                            0
+                        </strong>
+
+                        <small>
+                            / 100
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="ai-final">
+
+                    <span>
+                        🤖 AI RECOMMENDATION
+                    </span>
+
+                    <h3>
+                        BlueGrid Energy Strategy
+                    </h3>
+
+                    <p id="aiResultRecommendation">
+                        Select an island and run the optimizer
+                        to generate the recommended energy strategy.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 REPORT
+            ================================================== -->
+
+            <section
+                id="report"
+                class="report-section dashboard-panel"
+            >
+
+                <div class="section-heading">
+
+                    <span>
+                        BLUEGRID AI REPORT
+                    </span>
+
+                    <h2>
+                        Detailed Energy Optimization Report
+                    </h2>
+
+                    <p>
+                        Automatically generated analysis of the selected
+                        island's renewable energy system.
+                    </p>
+
+                </div>
+
+
+                <div class="report-header">
+
+                    <div>
+                        <h2>
+                            🌊 BlueGrid AI
+                        </h2>
+
+                        <p>
+                            Optimal Hybrid Renewable Energy Planner
+                        </p>
+                    </div>
+
+
+                    <div>
+                        <small>
+                            Report ID
+                        </small>
+
+                        <strong id="reportId">
+                            BG-000000
+                        </strong>
+
+                        <small>
+                            Generated
+                        </small>
+
+                        <strong id="reportDate">
+                            --
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="report-grid">
+
+                    <div class="report-card">
+
+                        <h3>
+                            🏝️ Island Information
+                        </h3>
+
+                        <p>
+                            Island:
+                            <strong id="reportIsland">--</strong>
+                        </p>
+
+                        <p>
+                            Peak Demand:
+                            <strong id="reportDemand">--</strong>
+                        </p>
+
+                        <p>
+                            Solar CF:
+                            <strong id="reportSolar">--</strong>
+                        </p>
+
+                        <p>
+                            Wind CF:
+                            <strong id="reportWind">--</strong>
+                        </p>
+
+                        <p>
+                            OTEC CF:
+                            <strong id="reportOtec">--</strong>
+                        </p>
+
+                    </div>
+
+
+                    <div class="report-card">
+
+                        <h3>
+                            ⚡ Optimized Energy System
+                        </h3>
+
+                        <p>
+                            ☀️ Solar:
+                            <strong id="reportSolarPower">--</strong>
+                        </p>
+
+                        <p>
+                            ≋ Wind:
+                            <strong id="reportWindPower">--</strong>
+                        </p>
+
+                        <p>
+                            🌊 OTEC:
+                            <strong id="reportOtecPower">--</strong>
+                        </p>
+
+                        <p>
+                            🔋 Battery:
+                            <strong id="reportBattery">--</strong>
+                        </p>
+
+                    </div>
+
+
+                    <div class="report-card">
+
+                        <h3>
+                            📊 System Performance
+                        </h3>
+
+                        <p>
+                            Renewable:
+                            <strong id="reportRenewable">--</strong>
+                        </p>
+
+                        <p>
+                            Reliability:
+                            <strong id="reportReliability">--</strong>
+                        </p>
+
+                        <p>
+                            Reserve:
+                            <strong id="reportReserve">--</strong>
+                        </p>
+
+                        <p>
+                            LCOE:
+                            <strong id="reportLcoe">--</strong>
+                        </p>
+
+                        <p>
+                            Score:
+                            <strong id="reportScore">--</strong>
+                        </p>
+
+                        <p>
+                            Generation:
+                            <strong id="reportGeneration">--</strong>
+                        </p>
+
+                    </div>
+
+
+                    <div class="report-card">
+
+                        <h3>
+                            🤖 BlueGrid AI Analysis
+                        </h3>
+
+                        <p id="reportRecommendation">
+                            Run the optimizer to generate an AI recommendation.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="executive-summary">
+
+                    <h3>
+                        📋 Executive Summary
+                    </h3>
+
+                    <p id="reportAiSummary">
+                        No optimization report has been generated yet.
+                    </p>
+
+                </div>
+
+
+                <div class="report-actions">
+
+                    <button id="generateReportButton">
+                        📄 Generate Detailed Report
+                    </button>
+
+                    <button id="downloadPdfButton">
+                        ↓ Download PDF Report
+                    </button>
+
+                    <button id="printReportBtn">
+                        🖨 Print Report
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <footer>
+
+                <div>
+                    🌊 <strong>BlueGrid AI</strong>
+                </div>
+
+                <span>
+                    AI-powered renewable energy planning
+                    for sustainable islands.
+                </span>
+
+                <span>
+                    Team Tech Titans ⚡⚡
+                </span>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT LIBRARIES
+    ====================================================== -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js">
+    </script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+    </script>
+
+
+    <!-- YOUR JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
